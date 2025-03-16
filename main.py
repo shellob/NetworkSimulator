@@ -5,7 +5,7 @@ from Message import Message
 
 
 def echo_function(message: Message):
-    print(f"✅ [Эхо] Процесс {message.receiver_id} получил: {message.data.decode('utf-8')}")  # 🔥 Должно появляться
+    print(f"✅ [Эхо] Процесс {message.receiver_id} получил: {message.data.decode('utf-8')}")
 
 
 
@@ -27,7 +27,7 @@ def main():
 
     world.start_all_processes()
 
-    time.sleep(5)  # Даем симуляции время на обработку сообщений
+    time.sleep(5) 
 
     world.stop_all_processes()
 
