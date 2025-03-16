@@ -1,0 +1,22 @@
+processes 0 5
+setprocesses 0 5 echo
+
+
+link from 0 to 5 latency 1.0 type B
+link from 3 to 5 latency 2.0 type B
+link from 5 to 1 latency 7.0 type H2
+link from 5 to 2 latency 2.0 type B
+link from 5 to 4 latency 1.0 type B
+link from 2 to 1 latency 3.0 type H2
+link from 1 to 4 latency 5.0 type H2
+
+bidirected 1
+
+
+send from 0 to 5 "Сообщение из 0 в 5"
+send from 3 to 5 "От 3 к 5"
+send from 5 to 1 "Данные 5 → 1"
+send from 5 to 2 "Передача 5 → 2"
+send from 5 to 4 "Доставка 5 → 4"
+send from 2 to 1 "Инфо 2 → 1"
+send from 1 to 4 "Финальное сообщение 1 → 4"
