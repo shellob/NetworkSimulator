@@ -45,10 +45,10 @@ class NetworkLayer:
             time.sleep(latency)
 
             queue = self.get_message_queue(message.receiver_id)
-            print(f"📥 Сообщение добавлено в очередь {message.receiver_id}: {message}")
+            print(f" Сообщение добавлено в очередь {message.receiver_id}: {message}")
             queue.add_message(priority=int(time.time()), message=message)
         else:
-            print(f"⚠️ Ошибка: Канал {message.sender_id} → {message.receiver_id} не существует!")
+            print(f" Ошибка: Канал {message.sender_id} → {message.receiver_id} не существует!")
 
     def get_neighbors(self, node_id: int) -> List[int]:
         return [to_id for (from_id, to_id) in self.channels.keys() if from_id == node_id]

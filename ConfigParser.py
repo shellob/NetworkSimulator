@@ -16,15 +16,15 @@ class ConfigParser:
                         continue
                     self._parse_command(line)
         except FileNotFoundError:
-            print(f"⚠️ Ошибка: Файл {filepath} не найден!")
+            print(f" Ошибка: Файл {filepath} не найден!")
         except Exception as e:
-            print(f"⚠️ Ошибка при чтении конфигурации: {e}")
+            print(f" Ошибка при чтении конфигурации: {e}")
 
     def _parse_range(self, start: str, end: str):
         try:
             return range(int(start), int(end) + 1)
         except ValueError:
-            print(f"⚠️ Ошибка: Неверный формат чисел в диапазоне {start}-{end}")
+            print(f" Ошибка: Неверный формат чисел в диапазоне {start}-{end}")
             return range(0)
 
     def _parse_link(self, parts: list[str]):
@@ -41,7 +41,7 @@ class ConfigParser:
                 latency = float(parts[6])
                 self.world.network.create_channel(from_id, to_id, latency, bidirected=self.bidirected)
         except (IndexError, ValueError):
-            print(f"⚠️ Ошибка: Неверный формат команды link {' '.join(parts)}")
+            print(f" Ошибка: Неверный формат команды link {' '.join(parts)}")
 
     def _parse_command(self, line: str):
         parts = line.split()
@@ -60,7 +60,7 @@ class ConfigParser:
             elif cmd == 'setprocesses':
                 m, n, algorithm_name = int(parts[1]), int(parts[2]), parts[3]
                 def echo_function(msg: Message):
-                    print(f"✅ [Эхо] Процесс {msg.receiver_id} получил: {msg.data.decode('utf-8')}")
+                    print(f" [Эхо] Процесс {msg.receiver_id} получил: {msg.data.decode('utf-8')}")
                 for pid in range(m, n + 1):
                     if pid in self.world.processes:
                         print(f"🔧 Назначаем процессу {pid} алгоритм '{algorithm_name}'")
@@ -75,17 +75,17 @@ class ConfigParser:
                 to_id = int(parts[4])
                 message_text = ' '.join(parts[5:]).encode('utf-8')
                 msg = Message(from_id, to_id, data=message_text, algorithm="echo")
-                print(f"📤 Отправка сообщения: {msg}")
+                print(f" Отправка сообщения: {msg}")
                 self.world.network.send_message(msg)
 
             elif cmd == 'bidirected':
                 self.bidirected = bool(int(parts[1]))
 
             else:
-                print(f"⚠️ Неизвестная команда: {cmd}")
+                print(f" Неизвестная команда: {cmd}")
 
         except (IndexError, ValueError):
-            print(f"⚠️ Ошибка: Неверный формат команды {cmd} {' '.join(parts)}")
+            print(f" Ошибка: Неверный формат команды {cmd} {' '.join(parts)}")
 
     def __repr__(self):
         return f"<ConfigParser bidirected={self.bidirected}>"

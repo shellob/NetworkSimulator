@@ -31,7 +31,7 @@ class Message:
             data_bytes = json.dumps(obj).encode("utf-8")
             return cls(sender_id, receiver_id, data_bytes, algorithm)
         except TypeError:
-            print(f"⚠️ Ошибка сериализации JSON: {obj}")
+            print(f" Ошибка сериализации JSON: {obj}")
             return cls(sender_id, receiver_id, b"{}", algorithm)
 
     def deserialize_to_json(self) -> dict:
@@ -42,11 +42,11 @@ class Message:
 
     def mark_sent(self):
         self.sent_time = time.time()
-        print(f"📤 Сообщение {self} отправлено!")
+        print(f" Сообщение {self} отправлено!")
 
     def mark_received(self):
         self.received_time = time.time()
-        print(f"📥 Сообщение {self} получено!")
+        print(f" Сообщение {self} получено!")
 
     def __repr__(self):
         sent = datetime.fromtimestamp(self.sent_time).isoformat() if self.sent_time else "None"

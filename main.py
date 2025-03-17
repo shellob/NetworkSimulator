@@ -15,7 +15,7 @@ def main():
     parser = ConfigParser(world)
 
     try:
-        parser.parse("config.txt")
+        parser.parse("NetworkSimulator\config.txt")
     except Exception as e:
         print(f"⚠️ Ошибка при загрузке конфигурации: {e}")
         return
